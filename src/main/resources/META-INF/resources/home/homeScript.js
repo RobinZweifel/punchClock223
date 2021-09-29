@@ -17,7 +17,7 @@ const createEntry = (e) => {
     const entry = {};
     entry['checkIn'] = dateAndTimeToDate(formData.get('checkInDate'), formData.get('checkInTime'));
     entry['checkOut'] = dateAndTimeToDate(formData.get('checkOutDate'), formData.get('checkOutTime'));
-    //entry['sickLeave'] = checkboxToString(formData.get('sickLeave'));
+    entry['sickLeave'] = checkboxToString(formData.get('sickLeave'));
 
 
     fetch(`${URL}/entries`, {
@@ -34,10 +34,36 @@ const createEntry = (e) => {
     });
 };
 
+const createReason = (e) => {
+    e.preventDefault();
+    const sickLeave = {};
+    const formData = new FormData(e.target);
+    sickLeave['reason'] = formData.get('reason');
+
+}
+
+window.onload = () => {
+
+    console.log(document.querySelector("#sickLeaveCheckbox"));
+
+    document.querySelector("#sickLeaveCheckbox").addEventListener("change", (event) => {
+        let checked = document.querySelector("#sickLeaveCheckbox").checked;
+        console.log("sickleave: ", checked);
+        console.log(event)
+        if (checked) {
+            document.querySelector("#sickLeaveData").style.display = "block";
+        } else {
+            console.log("none")
+            document.querySelector("#sickLeaveData").style.display = "none";
+        }
+    })
+}
+
+
 const checkboxToString = (bol) => {
-    if (bol){
+    if (bol) {
         return "true";
-    }else{
+    } else {
         return "false";
     }
 }
@@ -61,9 +87,9 @@ const createCell = (text) => {
 };
 
 const bolToString = (bol) => {
-    if (bol === true){
+    if (bol === true) {
         return 'Krank';
-    }else{
+    } else {
         return 'Gesund';
     }
 }
@@ -81,7 +107,7 @@ const renderEntries = () => {
     });
 };
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
     const createEntryForm = document.querySelector('#createEntryForm');
     createEntryForm.addEventListener('submit', createEntry);
     indexEntries();

@@ -2,7 +2,6 @@ package ch.zli.m223.punchclock.domain;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.time.LocalDateTime;
 
 @Entity
 public class SickLeave {
@@ -16,8 +15,6 @@ public class SickLeave {
     @Column(nullable = false)
     private String reason;
 
-    @Column(nullable = false)
-    private Date date;
 
     public Long getId() {
         return id;
@@ -43,11 +40,4 @@ public class SickLeave {
         this.reason = reason;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }
