@@ -1,7 +1,6 @@
 if (localStorage.getItem("token") === null) {
     location.href = "/login/login.html";
     console.log(localStorage.getItem("token"));
-
 }
 console.log(localStorage.getItem("token"))
 
