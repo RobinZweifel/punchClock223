@@ -50,6 +50,7 @@ function deleteEntry(id){
             'Content-type': 'Application/json'
         }
     })
+    indexEntries();
 }
 
 const createLeave = (e) => {
