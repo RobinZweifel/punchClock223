@@ -75,4 +75,13 @@ public class EntryController {
     public Entry update(Entry entry){
         return entryService.updateEntry(entry);
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/jpql")
+    @Operation(summary = "Execute Querry", description = "Executes a jpql Query")
+    public List<Entry> getJpql(){
+        return entryService.jpqlQuerry();
+    }
 }

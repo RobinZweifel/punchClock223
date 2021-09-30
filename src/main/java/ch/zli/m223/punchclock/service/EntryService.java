@@ -5,6 +5,9 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import ch.zli.m223.punchclock.domain.Entry;
@@ -15,6 +18,12 @@ public class EntryService {
     private EntityManager entityManager;
 
     public EntryService() {
+    }
+
+    @Transactional
+    public List<Entry> jpqlQuerry(){
+        var query = entityManager.createQuery("SELECT (*) FROM Entry e INNER JOIN User u WHERE e.user_id = u.id GROUP BY id");
+        return query.getResultList();
     }
 
     @Transactional 

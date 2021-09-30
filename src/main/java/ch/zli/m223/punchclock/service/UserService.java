@@ -18,7 +18,6 @@ public class UserService {
     private EntityManager entityManager;
 
     private UserService(){
-
     }
 
     @Transactional
@@ -27,13 +26,7 @@ public class UserService {
         return user;
     }
 
-    @Transactional
-    public void jpqlQuerry(){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("factory");
-        entityManager = entityManagerFactory.createEntityManager();
 
-        Query query = entityManager.createQuery("SELECT * FROM entry ")
-    }
 
     @Transactional
     public void delUserObject(User user){
