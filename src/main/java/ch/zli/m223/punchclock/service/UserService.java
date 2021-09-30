@@ -6,6 +6,9 @@ import ch.zli.m223.punchclock.domain.User;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -25,6 +28,14 @@ public class UserService {
     }
 
     @Transactional
+    public void jpqlQuerry(){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("factory");
+        entityManager = entityManagerFactory.createEntityManager();
+
+        Query query = entityManager.createQuery("SELECT * FROM entry ")
+    }
+
+    @Transactional
     public void delUserObject(User user){
         entityManager.remove(user);
     }
@@ -36,7 +47,9 @@ public class UserService {
         return query.getResultList();
     }
 
-    public User getUser(Long id){return entityManager.find(User.class, id);}
+    public User getUser(Long id){
+        return entityManager.find(User.class, id);
+    }
 
     @Transactional
     public User updateUser(User user) {

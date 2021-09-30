@@ -35,14 +35,14 @@ public class UserController {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Add a new Entry", description = "The newly created entry is returned. The id may not be passed.")
+    @Operation(summary = "Add a new User", description = "The newly created entry is returned. The id may not be passed.")
     public User add(User user) {
         return userService.createUser(user);
     }
 
 
     @DELETE
-    @Operation(summary = "Deletes one Objekt", description = "")
+    @Operation(summary = "Deletes one User Objekt", description = "Deletes one User Objekt")
     public void deleteObject(User user){
         userService.delUserObject(user);
     }
@@ -50,6 +50,7 @@ public class UserController {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Updates one User Objekt", description = "Updates one User Objekt")
     public User update(User user){
         return userService.updateUser(user);
     }

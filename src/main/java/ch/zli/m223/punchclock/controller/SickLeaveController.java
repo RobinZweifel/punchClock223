@@ -18,7 +18,7 @@ public class SickLeaveController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "List of all SickLeaves", description = "")
+    @Operation(summary = "List of all SickLeaves", description = "List of all SickLeaves returnes")
     public List<SickLeave> list(){
         return sickLeaveService.findAll();
     }
@@ -26,14 +26,14 @@ public class SickLeaveController {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Add a new Entry", description = "The newly created entry is returned. The id may not be passed.")
+    @Operation(summary = "Add a new Sick Leave", description = "The newly created entry is returned. The id may not be passed.")
     public SickLeave add(SickLeave sickLeave) {
         return sickLeaveService.createSickLeave(sickLeave);
     }
 
 
     @DELETE
-    @Operation(summary = "Deletes one Objekt", description = "")
+    @Operation(summary = "Deletes one Objekt", description = "Deletes a Sick Leave Object")
     public void deleteObject(SickLeave sickLeave){
         sickLeaveService.delSickLeaveObject(sickLeave);
     }
@@ -41,6 +41,7 @@ public class SickLeaveController {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Update Sick Leave", description = "To update one Sick Leave Object")
     public SickLeave update(SickLeave sickLeave){
         return sickLeaveService.updateSickLeave(sickLeave);
     }

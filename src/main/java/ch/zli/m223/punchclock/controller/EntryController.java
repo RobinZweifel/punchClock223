@@ -26,7 +26,7 @@ public class EntryController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "List all Entries", description = "")
+    @Operation(summary = "List all Entries", description = "To Get a List of all the ENtries in the Database")
     public List<Entry> list() {
         return entryService.findAll();
     }
@@ -34,6 +34,7 @@ public class EntryController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
+    @Operation(summary = "Get one Entity", description = "To Get on entity with the ID of the Entity")
     public Entry getEntry(@PathParam Long id) {
         return entryService.getEntry(id);
     }
@@ -55,14 +56,14 @@ public class EntryController {
 
 
     @DELETE
-    @Operation(summary = "Deletes one Objekt", description = "")
+    @Operation(summary = "Deletes one Objekt", description = "Deletes one Objekt with the passed ID")
     @Path("/{id}")
     public void deletePerId(@PathParam Long id){
         entryService.delEntryId(id);
     }
 
     @DELETE
-    @Operation(summary = "Deletes one Objekt", description = "")
+    @Operation(summary = "Deletes one Objekt", description = "Deletes one Objekt with the passed Object")
     public void deleteObject(Entry entry){
         entryService.delEntryObject(entry);
     }
@@ -70,6 +71,7 @@ public class EntryController {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Update Entry", description = "To update a Entry withe the passed Entry Obkect")
     public Entry update(Entry entry){
         return entryService.updateEntry(entry);
     }
