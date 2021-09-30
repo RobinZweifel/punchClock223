@@ -6,6 +6,7 @@ console.log(localStorage.getItem("token"))
 
 const URL = 'http://localhost:8080';
 let entries = [];
+let leaves = [];
 
 const dateAndTimeToDate = (dateString, timeString) => {
     return new Date(`${dateString}T${timeString}`).toISOString();
@@ -17,7 +18,7 @@ const createEntry = (e) => {
     const entry = {};
     entry['checkIn'] = dateAndTimeToDate(formData.get('checkInDate'), formData.get('checkInTime'));
     entry['checkOut'] = dateAndTimeToDate(formData.get('checkOutDate'), formData.get('checkOutTime'));
-    entry['sickLeave'] = checkboxToString(formData.get('sickLeave'));
+    //entry['sickLeave'] = checkboxToString(formData.get('sickLeave'));
 
 
     fetch(`${URL}/entries`, {
@@ -34,12 +35,37 @@ const createEntry = (e) => {
     });
 };
 
-const createReason = (e) => {
+function logOut(){
+    localStorage.setItem("token", "");
+    console.log(localStorage.getItem("token"));
+    window.location.replace("http://localhost:8080/login/login.html");
+}
+
+
+
+function deleteEntry(id){
+    fetch(`${URL}/entries/${id}`, {
+        method:'DELETE'
+    })
+}
+
+const createLeave = (e) => {
     e.preventDefault();
     const sickLeave = {};
     const formData = new FormData(e.target);
     sickLeave['reason'] = formData.get('reason');
 
+    fetch(`${URL}/leaves`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(sickLeave)
+    }).then((result) => {
+        result.json().then((sickLeave) => {
+            leaves.push(sickLeave);
+        });
+    });
 }
 
 window.onload = () => {
@@ -103,6 +129,13 @@ const renderEntries = () => {
         row.appendChild(createCell(new Date(entry.checkIn).toLocaleString()));
         row.appendChild(createCell(new Date(entry.checkOut).toLocaleString()));
         //row.appendChild(createCell(bolToString(entry.sickLeave)));
+
+        let btnDelete = document.createElement('button');
+        btnDelete.innerText = "delete";
+        btnDelete.onclick = () => {
+            deleteEntry(entry.id);
+        }
+        row.appendChild(btnDelete);
         display.appendChild(row);
     });
 };
