@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+import ch.zli.m223.punchclock.service.SickLeaveService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
@@ -17,7 +18,8 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 @Tag(name = "Entries", description = "Handling of entries")
 public class EntryController {
 
-    EntryService entryServic = new EntryService();
+    @Inject
+    SickLeaveService sickLeaveService;
 
     @Inject
     EntryService entryService;
@@ -42,7 +44,13 @@ public class EntryController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Add a new Entry", description = "The newly created entry is returned. The id may not be passed.")
     public Entry add(Entry entry) {
-       return entryService.createEntry(entry);
+        //Prüen ob sick leave existiert
+        //if(true){
+            //if ja --> Sick leave erstellen
+
+        //}
+        //Neuer sick leave laden und auf entry setzen
+        return entryService.createEntry(entry);
     }
 
 

@@ -18,7 +18,7 @@ const createEntry = (e) => {
     const entry = {};
     entry['checkIn'] = dateAndTimeToDate(formData.get('checkInDate'), formData.get('checkInTime'));
     entry['checkOut'] = dateAndTimeToDate(formData.get('checkOutDate'), formData.get('checkOutTime'));
-    //entry['sickLeave'] = checkboxToString(formData.get('sickLeave'));
+    //entry['sickLeave'] = checkboxToString(document.getElementById('sickLeaveCheckbox').value);
 
 
     fetch(`${URL}/entries`, {
@@ -45,7 +45,10 @@ function logOut(){
 
 function deleteEntry(id){
     fetch(`${URL}/entries/${id}`, {
-        method:'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'Application/json'
+        }
     })
 }
 
@@ -87,10 +90,15 @@ window.onload = () => {
 
 
 const checkboxToString = (bol) => {
-    if (bol) {
-        return "true";
+    console.log("Bevore: " + bol);
+    if (bol === "on") {
+        bol = "Krank"
+        console.log("After: " + bol);
+        return bol;
     } else {
-        return "false";
+        bol = "Gesund"
+        console.log("After: " + bol);
+        return bol;
     }
 }
 
@@ -128,7 +136,8 @@ const renderEntries = () => {
         row.appendChild(createCell(entry.id));
         row.appendChild(createCell(new Date(entry.checkIn).toLocaleString()));
         row.appendChild(createCell(new Date(entry.checkOut).toLocaleString()));
-        //row.appendChild(createCell(bolToString(entry.sickLeave)));
+        //console.log("entry.sickleave" + entry.sickLeave);
+        //row.appendChild(createCell(entry.sickLeave));
 
         let btnDelete = document.createElement('button');
         btnDelete.innerText = "delete";

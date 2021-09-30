@@ -19,13 +19,14 @@ public class Entry {
     @ManyToOne
     private Category category;
 
-    @ManyToOne
+    /*
+    @OneToOne
     private SickLeave sickLeave;
-
+*/
     public void setCategory(Category category) {
         this.category = category;
     }
-
+/*
     public SickLeave getSickLeave() {
         return sickLeave;
     }
@@ -33,7 +34,7 @@ public class Entry {
     public void setSickLeave(SickLeave sickLeave) {
         this.sickLeave = sickLeave;
     }
-
+*/
     public Long getId() {
         return id;
     }

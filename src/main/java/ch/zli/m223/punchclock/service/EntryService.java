@@ -30,7 +30,7 @@ public class EntryService {
 
     @Transactional
     public void delEntryId(Long id) {
-        entityManager.createQuery("delete from Entry where id =" + id);
+        entityManager.remove(getEntry(id));
     }
 
     @SuppressWarnings("unchecked")
