@@ -37,7 +37,6 @@ const createEntry = (e) => {
 
 function logOut(){
     localStorage.setItem("token", "");
-    console.log(localStorage.getItem("token"));
     window.location.replace("http://localhost:8080/login/login.html");
 }
 
@@ -146,6 +145,16 @@ const renderEntries = () => {
             deleteEntry(entry.id);
         }
         row.appendChild(btnDelete);
+
+
+        let btnEdit = document.createElement('button');
+        btnEdit.innerText = "edit";
+        btnEdit.onclick = () => {
+            localStorage.setItem("edit_id", entry.id);
+            console.log(entry.id);
+            location.href = "/editentry/editEntry.html";
+        }
+        row.appendChild(btnEdit);
         display.appendChild(row);
     });
 };

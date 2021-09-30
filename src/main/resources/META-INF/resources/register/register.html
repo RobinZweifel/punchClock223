@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="register.css">
+    <script rel="script" src="register.js"></script>
+</head>
+<body>
+
+<form>
+    <div class="container">
+        <h1>Register</h1>
+        <hr>
+
+        <label for="firstName"><b>Firstname</b></label>
+        <input type="text" placeholder="Enter Firstname" name="firstname" id="firstname" required>
+
+        <label for="lastName"><b>Lastname</b></label>
+        <input type="text" placeholder="Enter Lastname" name="lastname" id="lastname" required>
+
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" id="username" required>
+
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Password" name="password" id="password" required>
+        <hr>
+
+        <button onclick="createUser()" type="submit" class="registerbtn">Register</button>
+    </div>
+
+    <div class="container signin">
+        <p>Already have an account? <a href="../login/login.html">Sign in</a>.</p>
+    </div>
+</form>
+
+</body>
+</html>

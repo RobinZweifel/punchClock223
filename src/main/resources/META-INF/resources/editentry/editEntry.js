@@ -5,20 +5,22 @@ if (localStorage.getItem("token") === null) {
 console.log(localStorage.getItem("token"))
 
 const URL = 'http://localhost:8080';
-let entries = [];
 
 const dateAndTimeToDate = (dateString, timeString) => {
     return new Date(`${dateString}T${timeString}`).toISOString();
 };
 
+
 const editEntry = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const entry = {};
-    entry['id'] = formData.get('id');
+
+    entry['id'] = localStorage.getItem("edit_id");
     entry['checkIn'] = dateAndTimeToDate(formData.get('checkInDate'), formData.get('checkInTime'));
     entry['checkOut'] = dateAndTimeToDate(formData.get('checkOutDate'), formData.get('checkOutTime'));
 
+    console.log(entry);
 
     fetch(`${URL}/entries`, {
         method: 'PUT',
@@ -27,22 +29,22 @@ const editEntry = (e) => {
         },
         body: JSON.stringify(entry)
     }).then((result) => {
-        result.json().then((entry) => {
-            entries.push(entry);
-        });
+        location.href = "/home/home.html";
     });
-
-
 };
 
-const edit = async () => {
-    const response = await fetch(`${URL}/entries`, {
+
+
+function edit(){
+    let id = localStorage.getItem("edit_id");
+    console.log("LOCALSTORRAGE_ID: " + id)
+    fetch(`${URL}/entries`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         }
     });
-    const myJson = await response.json();
+    indexEntries();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
